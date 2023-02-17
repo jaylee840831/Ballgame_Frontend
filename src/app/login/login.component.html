@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="logo">
+        <img src="assets/ball.png" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        球賽約戰與影片分析平台
+    </div>
+    <form class="p-3 mt-3">
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input [(ngModel)]="loginValue.AccountName" type="text" name="userName" id="userName" placeholder="使用者名稱">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input [(ngModel)]="loginValue.Password" type="password" name="password" id="pwd" placeholder="密碼">
+        </div>
+        <button class="btn mt-3" (click)="login()">登入</button>
+    </form>
+    <div class="text-center fs-6">
+        <a href="#">忘記密碼?</a> 或 <a href="#">註冊</a>
+    </div>
+</div>
