@@ -1,0 +1,32 @@
+
+{ 
+  "games":[
+    {
+      "uid":"123456",
+      "sponsor":"jasper",
+      "gameName":"友誼賽",
+      "courtName":"大同運動中心",
+      "startDate":"2023-02-19T17:00:43.511Z",
+      "endDate":"2023-02-19T20:00:43.511Z",
+      "note":"滿20人開團 一人費用200"
+    },
+    {
+      "uid":"678910",
+      "sponsor":"john",
+      "gameName":"老人團",
+      "courtName":"中山國中室內球場",
+      "startDate":"2023-02-20T17:00:43.511Z",
+      "endDate":"2023-02-20T19:00:43.511Z",
+      "note":"限制40歲以上"
+    },
+    {
+      "uid":"456852",
+      "sponsor":"sam",
+      "gameName":"三對三",
+      "courtName":"新生公園",
+      "startDate":"2023-02-21T17:30:00.000Z",
+      "endDate":"2023-02-21T21:00:00.000Z",
+      "note":""
+    }
+  ]
+}

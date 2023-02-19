@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { GameAnalyzeComponent } from './game-analyze/game-analyze.component';
+import { GameHistoryComponent } from './game-history/game-history.component';
+import { GameComponent } from './game/game.component';
 
 import { ManageComponent } from './manage.component';
+import { NewGameComponent } from './new-game/new-game.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { 
     path:'',
     component:ManageComponent,
     children:[
-      // {path:'home',component:HomeComponent},
-      // {path:'page2',component:Page2Component},
-      {path:'',redirectTo:'home',pathMatch:'full'}]
+      {path:'game',component:GameComponent},
+      {path:'profile',component:ProfileComponent},
+      {path:'newGame',component:NewGameComponent},
+      {path:'history',component:GameHistoryComponent},
+      {path:'analyze',component:GameAnalyzeComponent},
+      {path:'chat',component:ChatRoomComponent},
+      {path:'',redirectTo:'game',pathMatch:'full'}]
   }
 ];
 
