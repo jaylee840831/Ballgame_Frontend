@@ -1,6 +1,22 @@
 #game_table{
+    /* background-color: rgb(223, 138, 28); */
+}
+thead{
+    color: whitesmoke;
     background-color: rgb(223, 138, 28);
 }
 .div_distance{
     margin-top: 100px;
+}
+.input-text:focus{
+    box-shadow: 0px 0px 0px;
+    border-color:rgb(223, 138, 28);
+    outline: 0px;
+}
+.form-control {
+    border: 1px solid gainsboro;
+}
+.btn-style{
+    color: whitesmoke;
+    background-color: rgb(223, 138, 28);
 }

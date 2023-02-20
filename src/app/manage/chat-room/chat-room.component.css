@@ -1,0 +1,10 @@
+#game_table{
+    /* background-color: rgb(223, 138, 28); */
+}
+thead{
+    background-color: rgb(223, 138, 28);
+    color: whitesmoke;
+}
+.div_distance{
+    margin-top: 100px;
+}

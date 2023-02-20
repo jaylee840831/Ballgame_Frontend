@@ -1,1 +1,41 @@
-<p>chat-room works!</p>
+<div class="container div_distance">
+    <!-- <div class="row">
+        <div class="col-md-12">        
+            <div class="input-group mb-3">
+                <input style="visibility:hidden" type="text" class="form-control input-text" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-dark" type="button" (click)="reloadPage()">刷新聊天室</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <table id="game_table" class="table table-bordered" style="width:100%">
+
+            <thead>
+                <tr>
+                  <th style="display:none">id</th>
+                  <th>發起人</th>
+                  <th>球局</th>
+                  <th>球場</th>
+                  <th>開始時間</th>
+                  <th>結束時間</th>
+                  <th>備註</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="display:none"></td>
+                    <td>{{game.sponsor}}</td>
+                    <td>{{game.gameName}}</td>
+                    <td>{{game.courtName}}</td>
+                    <td>{{ game.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0000' }}</td>
+                    <td>{{ game.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0000'}}</td>
+                    <td data-bs-toggle="tooltip" data-bs-placement="top" title="點我看更多" (click)="note(game.note)">
+                        {{game.note}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

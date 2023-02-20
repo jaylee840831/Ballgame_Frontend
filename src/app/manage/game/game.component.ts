@@ -1,8 +1,7 @@
 import { ModalService } from './../../@services/modal.service';
-import { HttpClient } from '@angular/common/http';
-import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Games } from 'src/app/@modules/games/games.module';
+import { AfterViewInit, Component, OnInit} from '@angular/core';
+import { GameService } from 'src/app/@services/game.service';
+import { Game } from 'src/app/@modules/games/games.module';
 
 @Component({
   selector: 'app-game',
@@ -10,33 +9,48 @@ import { Games } from 'src/app/@modules/games/games.module';
   styleUrls: ['./game.component.css']
 })
 
-export class GameComponent implements OnInit, AfterViewInit{
+export class GameComponent implements OnInit{
 
-  noteModal: any;
-  games!:Games;
+  games : Game[] = [];
 
-  constructor(private http : HttpClient, private modalService : ModalService){};
+  constructor(private gameService : GameService, private modalService : ModalService){};
 
   ngOnInit(): void {
-
-    //模擬使用api從後端取得資料
-    this.http.get<Games>('assets/games.json').subscribe(data=>{
-      if(data != null){
-        this.games = data;
+    this.gameService.getGames().subscribe(data=>{
+      
+      this.games = data.games;
+      window.setTimeout(( () => (<any>$('#game_table')).DataTable(
+        {
+          "language": {
+              "processing": "處理中...",
+              "loadingRecords": "載入中...",
+              "lengthMenu": "顯示 _MENU_ 項結果",
+              "zeroRecords": "沒有符合的結果",
+              "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+              "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+              "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+              "infoPostFix": "",
+              "search": "搜尋:",
+              "paginate": {
+                  "first": "第一頁",
+                  "previous": "上一頁",
+                  "next": "下一頁",
+                  "last": "最後一頁"
+              },
+              "aria": {
+                  "sortAscending": ": 升冪排列",
+                  "sortDescending": ": 降冪排列"
+              }
+          }
       }
+      ) ), 1000);//延遲一秒後顯示datatable
+
     });
-  }
 
-  ngAfterViewInit(){
-    (<any>$('#game_table')).DataTable();
   }
-
+  
   get gameList(){
-    return this.games.games;
-  }
-
-  chatRoom(){
-
+    return this.games;
   }
 
   note(note : string){

@@ -22,7 +22,6 @@ import * as $ from 'jquery';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule,
     ProcessBarModule
   ],
   providers: [],

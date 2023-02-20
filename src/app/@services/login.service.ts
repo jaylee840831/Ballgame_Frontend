@@ -7,7 +7,7 @@ import { LoginPost } from '../@modules/login/login.module';
 })
 export class LoginService {
 
-  private url = '/api/login6_8';
+  private url = '';
 
   constructor(private http : HttpClient) { }
 

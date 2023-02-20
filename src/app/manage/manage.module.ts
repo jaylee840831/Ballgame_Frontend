@@ -1,3 +1,4 @@
+import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ManageComponent } from './manage.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,8 +11,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { NewGameComponent } from './new-game/new-game.component';
 import { GameHistoryComponent } from './game-history/game-history.component';
 import { GameAnalyzeComponent } from './game-analyze/game-analyze.component';
-import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ModalComponent } from './modal/modal.component';
+import { FriendsComponent } from './friends/friends.component';
 
 
 @NgModule({
@@ -19,12 +20,13 @@ import { ModalComponent } from './modal/modal.component';
     MenuComponent,
     ManageComponent,
     GameComponent,
+    ChatRoomComponent,
     ProfileComponent,
     NewGameComponent,
     GameHistoryComponent,
     GameAnalyzeComponent,
-    ChatRoomComponent,
-    ModalComponent
+    ModalComponent,
+    FriendsComponent
   ],
   imports: [
     CommonModule,

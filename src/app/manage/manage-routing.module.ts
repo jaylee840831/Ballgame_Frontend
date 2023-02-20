@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../@guard/auth.guard';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { FriendsComponent } from './friends/friends.component';
 import { GameAnalyzeComponent } from './game-analyze/game-analyze.component';
 import { GameHistoryComponent } from './game-history/game-history.component';
 import { GameComponent } from './game/game.component';
@@ -15,11 +17,12 @@ const routes: Routes = [
     component:ManageComponent,
     children:[
       {path:'game',component:GameComponent},
+      {path:'chat/:uid',component:ChatRoomComponent},
       {path:'profile',component:ProfileComponent},
       {path:'newGame',component:NewGameComponent},
       {path:'history',component:GameHistoryComponent},
       {path:'analyze',component:GameAnalyzeComponent},
-      {path:'chat',component:ChatRoomComponent},
+      {path:'friends',component:FriendsComponent},
       {path:'',redirectTo:'game',pathMatch:'full'}]
   }
 ];
