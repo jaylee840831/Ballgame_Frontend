@@ -1,14 +1,5 @@
 <div class="container div_distance">
-    <!-- <div class="row">
-        <div class="col-md-12">        
-            <div class="input-group mb-3">
-                <input style="visibility:hidden" type="text" class="form-control input-text" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-dark" type="button" (click)="reloadPage()">刷新聊天室</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
+
     <div class="row">
         <table id="game_table" class="table table-bordered" style="width:100%">
 
@@ -39,3 +30,107 @@
         </table>
     </div>
 </div>
+
+<!-- 聊天室 -->
+<div class="main">
+    <div class="container ">
+      <div class="chat-log">
+
+
+            <!-- <div class="chat-log__item">
+            <h3 class="chat-log__author">Felipe <small>14:30</small></h3>
+            <div class="chat-log__message">Yo man</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+            <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+            <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <img src="assets/ball.png">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">上面的架構看似沒問題，但是它事實上有個缺點，有沒有注意到，很多的邏輯運算都在message server裡面做，我原本是將它定義成只用來收發訊息，但是我現在很多判斷都在裡面做，雖然在量不大時，還沒什麼問題，但如果量很大的話message server會上天堂的。
+
+                    所以我決定在增加一個服務，就取名為Logical Server，架構圖如下 :
+                    
+                    
+                    
+                    它主要的工作就是要處理所有要送出與收到的邏輯運算，像我們剛剛上面說到，要更新使用者狀態也改成從這裡運作，而決定那些訊息要存放到離線 server 也是在這處理，而在每一次使用者登入時，要傳送的訊息也都是從這裡處理好，然後在去通知message server和他說，該送貨囉 ~~
+                    
+                    聊天群架構 V-4
+                    上面的架構中，我們基本上已經可以處理不少需求了，但我們在思考看看，有沒有那個地方可以改進，我們從一個角度來想，流量，我們仔細想一下那一個地方的流量是最大的 ? 嗯就是message server，假設我們一台message serverhold 不住要著麼辦呢 ?
+                    
+                    這時就是針對message server進行擴充，架構會變成如下 :
+                    
+                    
+                    
+                    上面新增加了兩個服務 :
+                    
+                    Proxy : 用來決定要使用那台message server與client進行連線，事實上就是 load balance 的功能。
+                    
+                    Dispatch : 用來決定訊息要傳送到那一個message server。
+                    
+                    我們每一次要建立 websocket 連線時，都會需要先連到proxy由它來決定你要去那個message server建立 websocket 連線。
+                    
+                    然後每當有訊息進來後，會到一個名為dispatch的服務，先將該訊息進行包裝，並且也會注明該訊息是從那個 message server 過來的，然後再傳送到 logical server 中，判斷那將該訊息送到那些用戶上，最後在回送到dispatch上，由它來決定要送到那個message server 上，最後再由它回傳給用戶上。
+                    
+                    結論
+                    在這篇文章中，我們所討論到的聊天群架構，事實上到 V-4 版本，已經可以處理大致上WEB!聊天群會用的功能，下一篇文章中我們將要來討論如果來設計聊天室。</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own">
+                <h3 class="chat-log__author">Fabrício <small>14:33</small></h3>
+                <div class="chat-log__message">BRB</div>
+            </div> -->
+
+
+      </div>
+
+      <div class="chat-form">
+        <div class="container ">
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="col-sm-10 col-xs-8">
+                <input type="text" id="messageInfo" class="form-control" placeholder="輸入訊息" />
+              </div>
+              <div class="col-sm-2 col-xs-4">
+                <button type="submit" (click)="send()" class="btn btn-success btn-block">傳送</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>

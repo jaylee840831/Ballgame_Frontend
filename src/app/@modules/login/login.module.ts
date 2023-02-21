@@ -1,5 +1,5 @@
 export interface LoginPost {
-  email: string;
+  account: string;
   password: string;
   status: number;
   jwt: string;
