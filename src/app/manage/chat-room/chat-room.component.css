@@ -11,7 +11,7 @@ thead{
 
 
 /*----------------------------------------聊天室-------------------------------------------*/
-.page-header {
+/* .page-header {
 	background: #006A4E;
 	margin: 0;
   padding: 20px 0 10px;
@@ -19,15 +19,15 @@ thead{
 	position: fixed;
 	width: 100%;
   z-index: 1
-}
+} */
 .main {
 	height: auto;
-	padding-top: 70px;
+	/* padding-top: 70px; */
 }
 
 .chat-log {
 	padding: 40px 0 114px;
-	height: 400px;
+	height: 350px;
 	overflow: auto;
 }
 .chat-log__item {
@@ -50,7 +50,7 @@ thead{
 .chat-form {
 	background: whitesmoke;
 	padding: 20px 0;
-	/* position: fixed; */
+	/* position: fixed;  */
 	/* bottom: 0; */
 	width: 100%;
 }

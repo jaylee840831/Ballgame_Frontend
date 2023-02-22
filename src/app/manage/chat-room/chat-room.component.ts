@@ -1,3 +1,4 @@
+import { CommonService } from './../../@services/common.service';
 import { WebsocketService } from './../../@services/websocket.service';
 import { GameService } from './../../@services/game.service';
 import { ModalService } from './../../@services/modal.service';
@@ -17,9 +18,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
   stompClient:any;
   url = 'http://localhost:8080/server1';
   subscribeUrl = '/topic/return-to';
-  messageObj!:Object;
 
-  constructor(private websocketService : WebsocketService, private gameService : GameService,private modalService : ModalService ,private route : ActivatedRoute){}
+  constructor(private commonService : CommonService, private websocketService : WebsocketService, private gameService : GameService,private modalService : ModalService ,private route : ActivatedRoute){}
 
   ngOnInit(): void {
 
@@ -41,6 +41,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
 
         let message = JSON.parse(response.body);
         this.loadMessage(message);
+
       })
     }), 1000);
 
@@ -58,24 +59,55 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
   }
 
   loadMessage(message:any){
-    $('.chat-log').append(
-      '<div class="chat-log__item">'
-      +'<img src="assets/ball.png">'
-      +'<h3 class="chat-log__author">'
-      +message.name
-      +'<small>14:30</small></h3>'
-      +'<div class="chat-log__message">'
-      +message.content
-      +'</div>'
-      +'</div>'
-    );
+
+    if(message.groupUid == this.uid){
+
+      if(localStorage.getItem('account') != message.name){
+
+        $('.chat-log').append(
+          '<div style="	background: #fafafa;padding: 10px;margin: 0 auto 20px;max-width: 80%;float: left;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,.1);clear: both;">'
+          +'<img src="assets/ball.png">'
+          +'<h3 style="	margin: 0 auto .5em;font-size: 18px;font-weight: bold;">'
+          +message.name+'&nbsp;</h3>'
+          +'<div>'
+          +message.content
+          +'</div>'
+          +'<div>'
+          +'<small style="font-weight: bold;">'+ this.commonService.formatDate(new Date(message.date)) +'</small>'
+          +'</div>'
+          +'</div>'
+        );
+  
+      }
+      else{
+  
+        $('.chat-log').append(
+          '<div style="	background: #fafafa;padding: 10px;margin: 0 auto 20px;max-width: 80%;float: left;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,.1);clear: both;	float: right;background: #DCF8C6;text-align: right;">'
+          +'<img src="assets/ball.png">'
+          +'<h3 style="	margin: 0 auto .5em;font-size: 18px;font-weight: bold;">'
+          +message.name+'&nbsp;</h3>'
+          +'<div>'
+          +message.content
+          +'</div>'
+          +'<div>'
+          +'<small style="font-weight: bold;">'+ this.commonService.formatDate(new Date(message.date)) +'</small>'
+          +'</div>'
+          +'</div>'
+        );
+  
+      }
+
+    }
+
   }
 
   send(){
 
     let jsonObj={
+      groupUid : this.uid,
       name : localStorage.getItem('account'),
-      content : $('#messageInfo').val()
+      content : $('#messageInfo').val(),
+      date : new Date()
     }
 
     // console.log($('#messageInfo').val())
