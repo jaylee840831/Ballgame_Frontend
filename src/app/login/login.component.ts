@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginPost } from '../@modules/login/login.module';
+import { LoginPost, LoginResponse } from '../@modules/login/login.module';
 import { LoginService } from '../@services/login.service';
 
 @Component({
@@ -12,12 +12,16 @@ import { LoginService } from '../@services/login.service';
 export class LoginComponent implements OnInit{
 
   loginValue: LoginPost = {
-    account: '',
-    password: '',
-    status: 0,
-    jwt: '',
-    message:''  
+    email: '',
+    password: ''
   }
+
+  // loginResponse: LoginResponse = {
+  //   name: '',
+  //   status: 0,
+  //   jwt: '',
+  //   message:''  
+  // }
 
   constructor(private http : HttpClient, private router:Router, private loginService : LoginService) { }
 
@@ -26,14 +30,30 @@ export class LoginComponent implements OnInit{
 
   login(){
 
-    if(this.loginValue.account.length == 0 || this.loginValue.password.length == 0){
+    if(this.loginValue.email.length == 0 || this.loginValue.password.length == 0){
 
       this.showAlert('帳號或密碼不可為空');
 
     }else{
 
-      // this.loginService.jwtLogin(this.loginValue).subscribe((data: any) => {
-      //   if (data.Status === 1) {
+      this.loginService.jwtLogin(this.loginValue).subscribe((data: any) => {
+
+        if (data.status === 1) {
+          localStorage.setItem('account',data.name);
+          localStorage.setItem('jwt', data.jwt); //儲存jwt(json web token)在瀏覽器
+          this.router.navigateByUrl('/manage');
+        }else{
+          this.showAlert(data.message);
+        }
+        
+      },
+      (err : any) => {
+        this.showAlert("登入失敗，請檢查帳號密碼是否正確以及帳號是否有註冊")
+      });
+
+      //模擬使用api從後端取得資料
+      // this.http.get<LoginPost>('assets/login.json').subscribe(data=>{
+      //   if (data.status === 1) {
       //     localStorage.setItem('account',this.loginValue.account);
       //     localStorage.setItem('jwt', data.jwt); //儲存jwt(json web token)在瀏覽器
       //     this.router.navigateByUrl('/manage');
@@ -41,17 +61,6 @@ export class LoginComponent implements OnInit{
       //     this.showAlert(data.message);
       //   }
       // });
-
-      // 模擬使用api從後端取得資料
-      this.http.get<LoginPost>('assets/login.json').subscribe(data=>{
-        if (data.status === 1) {
-          localStorage.setItem('account',this.loginValue.account);
-          localStorage.setItem('jwt', data.jwt); //儲存jwt(json web token)在瀏覽器
-          this.router.navigateByUrl('/manage');
-        }else{
-          this.showAlert(data.message);
-        }
-      });
 
     }
 

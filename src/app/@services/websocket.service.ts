@@ -13,6 +13,7 @@ export class WebsocketService {
 
     let socket = new SockJS(url);
     stompClient = Stomp.over(socket);
+
     stompClient.connect({},function(frame:any){
       console.log('connected: ' + frame);
     });

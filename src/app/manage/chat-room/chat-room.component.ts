@@ -110,8 +110,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
       date : new Date()
     }
 
-    // console.log($('#messageInfo').val())
-
     this.stompClient.send('/app/message', {}, JSON.stringify(jsonObj));
   }
 

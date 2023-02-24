@@ -1,6 +1,10 @@
 export interface LoginPost {
-  account: string;
+  email: string;
   password: string;
+}
+
+export interface LoginResponse {
+  name: string;
   status: number;
   jwt: string;
   message: string;

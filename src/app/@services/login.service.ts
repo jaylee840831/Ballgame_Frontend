@@ -7,11 +7,11 @@ import { LoginPost } from '../@modules/login/login.module';
 })
 export class LoginService {
 
-  private url = '';
+  private url = '/api/v1/auth';
 
   constructor(private http : HttpClient) { }
 
   jwtLogin(value : LoginPost){
-    return this.http.post(this.url + '/jwtLogin', value);
+    return this.http.post(this.url + '/authenticate', value);
   }
 }
