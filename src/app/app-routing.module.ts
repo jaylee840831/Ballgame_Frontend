@@ -11,6 +11,11 @@ const routes: Routes = [
   },
   { 
     //模組化並延遲載入
+    path:'register',
+    loadChildren:()=>import('./register/register.module').then(m=>m.RegisterModule)
+  },
+  { 
+    //模組化並延遲載入
     path:'manage',
     loadChildren:()=>import('./manage/manage.module').then(m=>m.ManageModule),
     canActivateChild: [AuthGuard]

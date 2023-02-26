@@ -1,0 +1,25 @@
+<div id="message-alert" [class]="alertStyle" class="alert large text-center fs-6" role="alert" style="visibility: hidden;">
+</div>
+<div class="wrapper">
+    <div class="logo">
+        <img src="assets/ball.png" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        <I>趕緊加入我們成為 Ball Meet 的球友吧!</I>
+    </div>
+    <form class="p-3 mt-3">
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input [(ngModel)]="registerValue.name" type="text" name="userName" id="userName" placeholder="帳號名稱">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input [(ngModel)]="registerValue.email" type="email" name="userEmail" id="userEmail" placeholder="email">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input [(ngModel)]="registerValue.password" type="password" name="password" id="pwd" placeholder="密碼(8個字元)">
+        </div>
+        <button class="btn mt-3" type="submit" (click)="register()">註冊</button>
+    </form>
+</div>

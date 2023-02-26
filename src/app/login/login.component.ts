@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit{
         
       },
       (err : any) => {
-        this.showAlert("登入失敗，請檢查帳號密碼是否正確以及帳號是否有註冊")
+        this.showAlert("登入失敗，請檢查帳號密碼是否正確以及帳號是否有註冊或是請洽客服")
       });
 
       //模擬使用api從後端取得資料
