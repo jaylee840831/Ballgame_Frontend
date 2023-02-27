@@ -19,12 +19,12 @@
                     <td>{{item.sponsor}}</td>
                     <td>{{item.gameName}}</td>
                     <td>{{item.courtName}}</td>
-                    <td>{{ item.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0000' }}</td>
-                    <td>{{item.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0000' }}</td>
+                    <td>{{ item.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}</td>
+                    <td>{{item.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}</td>
                     <td data-bs-toggle="tooltip" data-bs-placement="top" title="點我看更多" (click)="note(item.note)">
                         {{item.note}}
                     </td>
-                    <td><button class="btn btn-secondary" [routerLink]="['/manage/chat',item.uid]">聊天室</button></td>
+                    <td><button class="btn btn-secondary" [routerLink]="['/manage/chat',item.id]">聊天室</button></td>
                 </tr>
             </tbody>
         </table>

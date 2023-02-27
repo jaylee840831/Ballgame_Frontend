@@ -13,7 +13,7 @@ import { Game} from 'src/app/@modules/games/games.module';
 })
 export class ChatRoomComponent implements OnInit, OnDestroy{
 
-  uid = '';
+  uid!:number;
   game : Game = new Game();
   stompClient:any;
   url = 'http://localhost:8080/server1';
@@ -24,11 +24,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
 
     this.route.paramMap.subscribe(data=>{
-      this.uid = data.get('uid') as string;
+      this.uid = data.get('id') as unknown as number;
     });
 
     this.gameService.getGame(this.uid).subscribe(data=>{
-      this.game = data.games[0];
+      this.game = data;
     });
 
     //stomp client connect

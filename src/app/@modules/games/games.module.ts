@@ -1,17 +1,21 @@
 export interface Games{
     games:Array<{
-      uid:string,
+      id:number,
       sponsor:string,
       gameName:string,
       courtName:string,
       startDate:Date,
       endDate:Date,
-      note:string
+      note:string,
+      response:{
+        status:number,
+        message:string
+      }
     }>
 }
 
 export interface Game{
-  uid:string
+  id:number
   sponsor:string
   gameName:string
   courtName:string
@@ -21,15 +25,13 @@ export interface Game{
 }
 
 export class Game{
-  uid!:string
+  id!:number
   sponsor!:string
   gameName!:string
   courtName!:string
   startDate!:Date
   endDate!:Date
   note!:string
-
-  constructor(){}
 
   // constructor(  
   //   uid:string,

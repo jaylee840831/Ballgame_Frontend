@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -35,5 +36,14 @@ export class CommonService {
         // this.padTo2Digits(date.getSeconds()),
       ].join(':') + ' ' + MorningEvening
     );
+  }
+
+  getHeaderAuth(){
+
+    let httpHeaders = new HttpHeaders()
+    .set('authorization', "Bearer " + localStorage.getItem('jwt'))
+    .set('Content-Type', 'application/json');    
+
+    return httpHeaders;
   }
 }

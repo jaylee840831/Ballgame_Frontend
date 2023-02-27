@@ -20,8 +20,8 @@
                     <td>{{game.sponsor}}</td>
                     <td>{{game.gameName}}</td>
                     <td>{{game.courtName}}</td>
-                    <td>{{ game.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0000' }}</td>
-                    <td>{{ game.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0000'}}</td>
+                    <td>{{ game.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}</td>
+                    <td>{{ game.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0800'}}</td>
                     <td data-bs-toggle="tooltip" data-bs-placement="top" title="點我看更多" (click)="note(game.note)">
                         {{game.note}}
                     </td>

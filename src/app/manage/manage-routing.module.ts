@@ -17,7 +17,7 @@ const routes: Routes = [
     component:ManageComponent,
     children:[
       {path:'game',component:GameComponent},
-      {path:'chat/:uid',component:ChatRoomComponent},
+      {path:'chat/:id',component:ChatRoomComponent},
       {path:'profile',component:ProfileComponent},
       {path:'newGame',component:NewGameComponent},
       {path:'history',component:GameHistoryComponent},
