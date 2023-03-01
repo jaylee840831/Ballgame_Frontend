@@ -1,3 +1,4 @@
+import { CommonService } from './../@services/common.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit{
   //   message:''  
   // }
 
-  constructor(private http : HttpClient, private router:Router, private loginService : LoginService) { }
+  constructor(private http : HttpClient, private router:Router, private loginService : LoginService, private commonService : CommonService) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit{
 
     if(this.loginValue.email.length == 0 || this.loginValue.password.length == 0){
 
-      this.showAlert('帳號或密碼不可為空');
+      this.commonService.showAlert('帳號或密碼不可為空');
 
     }else{
 
@@ -43,12 +44,12 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('jwt', data.jwt); //儲存jwt(json web token)在瀏覽器
           this.router.navigateByUrl('/manage');
         }else{
-          this.showAlert(data.message);
+          this.commonService.showAlert(data.message);
         }
         
       },
       (err : any) => {
-        this.showAlert("登入失敗，請檢查帳號密碼是否正確以及帳號是否有註冊或是請洽客服")
+        this.commonService.showAlert("登入失敗，請檢查帳號密碼是否正確以及帳號是否有註冊或是請洽客服")
       });
 
       //模擬使用api從後端取得資料
@@ -64,15 +65,5 @@ export class LoginComponent implements OnInit{
 
     }
 
-  }
-
-  showAlert(message : string){
-
-    $('#message-alert').css("visibility", "visible");
-    $('#message-alert').html(message);
-    setTimeout(function() {
-      $('#message-alert').css("visibility", "hidden");
-    }, 3000);
-    
   }
 }

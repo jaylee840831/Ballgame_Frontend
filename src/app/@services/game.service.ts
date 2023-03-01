@@ -1,5 +1,5 @@
 import { CommonService } from './common.service';
-import { Game, Games} from './../@modules/games/games.module';
+import { Game, Games, GamePost } from './../@modules/games/games.module';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -26,7 +26,7 @@ export class GameService {
     return this.http.get<any>(this.url + '/' + id, { headers: this.commonService.getHeaderAuth() } );
   }
 
-  addGame(){
-    return this.http.get<any>(this.url + '/new', { headers: this.commonService.getHeaderAuth() } );
+  addGame(value : GamePost){
+    return this.http.post<any>(this.url + '/new', value, { headers: this.commonService.getHeaderAuth() } );
   }
 }

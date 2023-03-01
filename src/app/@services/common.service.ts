@@ -46,4 +46,14 @@ export class CommonService {
 
     return httpHeaders;
   }
+
+  showAlert(message : string){
+
+    $('#message-alert').css("display", "block");
+    $('#message-alert').html(message);
+    setTimeout(function() {
+      $('#message-alert').css("display", "none");
+    }, 3000);
+    
+  }
 }

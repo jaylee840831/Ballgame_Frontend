@@ -24,6 +24,15 @@ export interface Game{
   note:string
 }
 
+export interface GamePost{
+  sponsor:string
+  gameName:string
+  courtName:string
+  startDate:Date
+  endDate:Date
+  note:string
+}
+
 export class Game{
   id!:number
   sponsor!:string
