@@ -40,11 +40,16 @@ export class LoginComponent implements OnInit{
       this.loginService.jwtLogin(this.loginValue).subscribe((data: any) => {
 
         if (data.status === 1) {
+
+          localStorage.setItem('email',data.email);
           localStorage.setItem('account',data.name);
           localStorage.setItem('jwt', data.jwt); //儲存jwt(json web token)在瀏覽器
           this.router.navigateByUrl('/manage');
+
         }else{
+
           this.commonService.showAlert(data.message);
+          
         }
         
       },

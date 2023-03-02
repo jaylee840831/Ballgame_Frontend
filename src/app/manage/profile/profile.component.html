@@ -1,1 +1,62 @@
-<p>profile works!</p>
+<div class="container contact-form">
+    <!-- <div class="contact-image">
+        <img src="assets/basketballplayer.png" alt=""/>
+    </div> -->
+    <form>
+       <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    姓名
+                    <input type="text" [(ngModel)]="profileValue.name" name="txtName" class="form-control" placeholder="" value="" />
+                </div>
+                <p></p>
+                <div class="form-group">
+                    身高
+                    <input type="number" [(ngModel)]="profileValue.height" name="txtHeight" class="form-control" placeholder="" value="" min="0" max="250"/>
+                </div>
+                <p></p>
+                <div class="form-group">
+                    體重
+                    <input type="number" [(ngModel)]="profileValue.weight" name="txtWeight" class="form-control" placeholder="" value="" min="0" max="250"/>
+                </div>
+                <p></p>
+                <div class="form-group">
+                    性別
+                    <select [(ngModel)]="profileValue.sex" name="sex">
+                        <option value="1" selected>男</option>
+                        <option value="0">女</option>
+                        <option value="2">其他</option>
+                    </select>
+                </div>
+                <p></p>
+                <div class="form-group">
+                    場上位置
+                    <select [(ngModel)]="profileValue.position" name="position">
+                        <option value="1" selected>控球後衛</option>
+                        <option value="2">得分後衛</option>
+                        <option value="3">小前鋒</option>
+                        <option value="4">大前鋒</option>
+                        <option value="5">中鋒</option>
+                    </select>
+                </div>
+                <p></p>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    大頭照
+                    <input type=file (change)="file_changed($event)" disabled>
+                    <img style="width: 100%; height: 100%;" id="imgShow" accept="image/png, image/jpeg" src="assets/basketballplayer.png" alt=""/>
+                </div>
+                <p></p>
+                <div class="form-group" style="text-align: center;">
+                    <button type="submit" name="btnSubmit" class="btn btn-danger btnContact" (click)="confirm()">確定</button>
+                </div>
+                <p></p>
+            </div>
+            <div class="col-md-12">
+                <div id="message-alert" class="alert alert-danger large text-center fs-6" role="alert" style="display:none">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

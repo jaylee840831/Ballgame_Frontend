@@ -41,7 +41,6 @@ export class NewGameComponent {
 
     }else{
 
-      this.gameValue.sponsor = localStorage.getItem('account') as string;
       this.gameValue.startDate = $("#startDate").val() + '+0800' as unknown as Date;
       this.gameValue.endDate = $("#endDate").val() + '+0800' as unknown as Date;
 
