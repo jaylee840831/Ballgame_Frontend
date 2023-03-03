@@ -33,6 +33,15 @@ export interface GamePost{
   note:string
 }
 
+export interface AllMarkPost{
+  email:string
+}
+
+export interface MarkPost{
+  email:string
+  gameId:number
+}
+
 export class Game{
   id!:number
   sponsor!:string

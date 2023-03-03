@@ -20,4 +20,8 @@ export class ProfileService {
     return this.http.post<any>(this.url + '/info/get', value, { headers: this.commonService.getHeaderAuth() });
   }
 
+  getUserMark(value : string){
+    return this.http.post<any>(this.url + '/info/mark', value, { headers: this.commonService.getHeaderAuth() });
+  }
+
 }

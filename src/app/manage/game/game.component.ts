@@ -1,3 +1,5 @@
+import { MarkPost, AllMarkPost } from './../../@modules/games/games.module';
+import { ProfileService } from './../../@services/profile.service';
 import { ModalService } from './../../@services/modal.service';
 import { AfterViewInit, Component, OnInit} from '@angular/core';
 import { GameService } from 'src/app/@services/game.service';
@@ -11,13 +13,24 @@ import { Game, Games } from 'src/app/@modules/games/games.module';
 
 export class GameComponent implements OnInit{
 
+  marks : any;
   games : any;
 
-  constructor(private gameService : GameService, private modalService : ModalService){};
+  markValue : MarkPost = {
+    email:'',
+    gameId:-1
+  }
+
+  allMarkValue : AllMarkPost = {
+    email:''
+  }
+
+  constructor(private gameService : GameService, private profileService : ProfileService, private modalService : ModalService){};
 
   ngOnInit(): void {
 
-    this.gameService.getGames().subscribe(data=>{
+    this.allMarkValue.email = localStorage.getItem('email') as string;
+    this.gameService.getGames(this.allMarkValue).subscribe(data=>{
       
       this.games = data;
       this.loadTable();
@@ -62,5 +75,30 @@ export class GameComponent implements OnInit{
 
   note(note : string){
     this.modalService.showView('備註',note);
+  }
+
+  mark(id : number){
+
+    this.markValue.email = localStorage.getItem("email") as string;
+    this.markValue.gameId = id;
+
+    if($("#"+id).attr("fill") == "currentColor"){
+
+      this.gameService.markGame(this.markValue).subscribe(data=>{
+
+        $("#"+id).attr({fill:"red"});
+
+      });
+
+    }else{
+
+      this.gameService.deleteMarkGame(this.markValue).subscribe(data=>{
+
+        $("#"+id).attr({fill:"currentColor"});
+        
+      });
+
+    }
+
   }
 }
