@@ -31,6 +31,14 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
       this.game = data;
     });
 
+    this.gameService.getChat(this.uid).subscribe(data=>{
+
+      for(var d of data ){
+        this.loadMessage(d);
+      }
+
+    });
+
     //stomp client connect
     this.stompClient = this.websocketService.connect(this.stompClient, this.url);
 
@@ -66,7 +74,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
 
         $('.chat-log').append(
           '<div style="	background: #fafafa;padding: 10px;margin: 0 auto 20px;max-width: 80%;float: left;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,.1);clear: both;">'
-          +'<img src="assets/ball.png">'
+          +'<img src="assets/basketball.png" style="width:100px;height:100px">'
           +'<h3 style="	margin: 0 auto .5em;font-size: 18px;font-weight: bold;">'
           +message.name+'&nbsp;</h3>'
           +'<div>'
@@ -83,7 +91,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
   
         $('.chat-log').append(
           '<div style="	background: #fafafa;padding: 10px;margin: 0 auto 20px;max-width: 80%;float: left;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,.1);clear: both;	float: right;background: #DCF8C6;text-align: right;">'
-          +'<img src="assets/ball.png">'
+          +'<img src="assets/basketballplayer.png" style="width:100px;height:100px">'
           +'<h3 style="	margin: 0 auto .5em;font-size: 18px;font-weight: bold;">'
           +message.name+'&nbsp;</h3>'
           +'<div>'

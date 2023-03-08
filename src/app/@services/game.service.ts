@@ -26,6 +26,10 @@ export class GameService {
     return this.http.get<any>(this.url + '/' + id, { headers: this.commonService.getHeaderAuth() } );
   }
 
+  getChat(id : number){
+    return this.http.get<any>(this.url + '/chatMessages/' + id, { headers: this.commonService.getHeaderAuth() } );
+  }
+
   addGame(value : GamePost){
     return this.http.post<any>(this.url + '/new', value, { headers: this.commonService.getHeaderAuth() } );
   }
