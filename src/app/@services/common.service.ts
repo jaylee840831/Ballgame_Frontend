@@ -41,10 +41,19 @@ export class CommonService {
   getHeaderAuth(){
 
     let httpHeaders = new HttpHeaders()
+    .set("Access-Control-Allow-Origin", "*") // CORS HEADER
+    .set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept") // CORS HEADER
+    .set("Access-Control-Allow-Credentials", "true")
+    .set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE")
+    .set("Access-Control-Max-Age", "3600")
     .set('authorization', "Bearer " + localStorage.getItem('jwt'))
-    .set('Content-Type', 'application/json');    
+    .set('Content-Type', 'application/json');
 
     return httpHeaders;
+  }
+
+  getBackendUrl(){
+    return ""; //填入自己的後端url
   }
 
   showAlert(message : string){

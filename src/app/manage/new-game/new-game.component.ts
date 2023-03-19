@@ -44,7 +44,7 @@ export class NewGameComponent {
       this.gameValue.startDate = $("#startDate").val() + '+0800' as unknown as Date;
       this.gameValue.endDate = $("#endDate").val() + '+0800' as unknown as Date;
 
-      this.gameService.addGame(this.gameValue).subscribe(data=>{
+      this.gameService.addGame(this.gameValue).subscribe((data: any)=>{
       
         if(data.response.status === 1){
 

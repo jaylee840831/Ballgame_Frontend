@@ -16,7 +16,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
   uid!:number;
   game : Game = new Game();
   stompClient:any;
-  url = 'http://localhost:8080/server1';
+  url = this.commonService.getBackendUrl()+'/server1';
   subscribeUrl = '/topic/return-to';
 
   constructor(private commonService : CommonService, private websocketService : WebsocketService, private gameService : GameService,private modalService : ModalService ,private route : ActivatedRoute){}
@@ -27,11 +27,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
       this.uid = data.get('id') as unknown as number;
     });
 
-    this.gameService.getGame(this.uid).subscribe(data=>{
+    this.gameService.getGame(this.uid).subscribe((data: any)=>{
       this.game = data;
     });
 
-    this.gameService.getChat(this.uid).subscribe(data=>{
+    this.gameService.getChat(this.uid).subscribe((data: any)=>{
 
       for(var d of data ){
         this.loadMessage(d);
@@ -51,7 +51,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
         this.loadMessage(message);
 
       })
-    }), 1000);
+    }), 4000);
 
   }
 
@@ -119,6 +119,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
     }
 
     this.stompClient.send('/app/message', {}, JSON.stringify(jsonObj));
+    $('#messageInfo').val('')
   }
 
   // reloadPage(){

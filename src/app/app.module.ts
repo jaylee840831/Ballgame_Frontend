@@ -1,5 +1,5 @@
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import * as $ from 'jquery';
+import { BasicAuthHtppInterceptorService } from './@services/basic-auth-htpp-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import * as $ from 'jquery';
     FormsModule,
     ProcessBarModule
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true
+    // } 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

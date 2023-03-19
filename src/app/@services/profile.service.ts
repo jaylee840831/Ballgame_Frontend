@@ -8,20 +8,21 @@ import { userInfoPost } from '../@modules/user.module';
 })
 export class ProfileService {
 
-  private url = '/api/v1/user';
+  private url = this.commonService.getBackendUrl()+'/api/v1/user';
+  // private url = '/api/v1/user';
 
   constructor(private http : HttpClient, private commonService : CommonService) { }
 
   editUserInfo(value : userInfoPost){
-    return this.http.post<any>(this.url + '/info/edit', value, { headers: this.commonService.getHeaderAuth() });
+    return this.http.post(this.url + '/info/edit', value, { headers: this.commonService.getHeaderAuth() });
   }
 
   getUserInfo(value : string){
-    return this.http.post<any>(this.url + '/info/get', value, { headers: this.commonService.getHeaderAuth() });
+    return this.http.post(this.url + '/info/get', value, { headers: this.commonService.getHeaderAuth() });
   }
 
   getUserMark(value : string){
-    return this.http.post<any>(this.url + '/info/mark', value, { headers: this.commonService.getHeaderAuth() });
+    return this.http.post(this.url + '/info/mark', value, { headers: this.commonService.getHeaderAuth() });
   }
 
 }

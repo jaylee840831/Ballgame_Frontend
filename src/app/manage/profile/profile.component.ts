@@ -35,7 +35,7 @@ export class ProfileComponent {
 
   loadUserInfo(){
 
-    this.profileService.getUserInfo(localStorage.getItem('email') as string).subscribe(data=>{
+    this.profileService.getUserInfo(localStorage.getItem('email') as string).subscribe((data: any)=>{
 
       this.profileValue.name = data.name;
 
@@ -80,7 +80,7 @@ export class ProfileComponent {
       // formData.set("image",this.imgFile);
       // console.log(formData)
 
-      this.profileService.editUserInfo(this.profileValue).subscribe(data=>{
+      this.profileService.editUserInfo(this.profileValue).subscribe((data: any)=>{
 
         if(data.response.status === 1){
 
