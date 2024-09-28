@@ -23,6 +23,7 @@
     "@stomp/stompjs": "^7.0.0",
     "@types/popper.js": "^1.11.0",
     "@types/sockjs-client": "^1.5.1",
+    "ballgame-frontend": "file:",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.3",
     "popper.js": "^1.16.1",
