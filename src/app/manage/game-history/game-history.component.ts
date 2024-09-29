@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AllMarkPost, MarkPost } from 'src/app/@modules/games/games.module';
 import { GameService } from 'src/app/@services/game.service';
 import { ModalService } from 'src/app/@services/modal.service';
 import { ProfileService } from 'src/app/@services/profile.service';
+import { Game, Games } from 'src/app/@modules/games/games.module';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-game-history',
   templateUrl: './game-history.component.html',
   styleUrls: ['./game-history.component.css']
 })
-export class GameHistoryComponent implements OnInit{
+export class GameHistoryComponent implements OnInit, AfterViewInit{
 
   marks : any;
   games : any;
+  dataSource : any;
+
+  elementData : Games[] = [];
 
   markValue : MarkPost = {
     email:'',
@@ -23,18 +31,36 @@ export class GameHistoryComponent implements OnInit{
     email:''
   }
 
+  displayedColumns: string[] = [
+    'id',
+    'chat',
+    'sponsor',
+    'gameName',
+    'courtName',
+    'startDate',
+    'endDate',
+    'note'
+  ];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(private gameService : GameService, private profileService : ProfileService, private modalService : ModalService){};
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
+  ngAfterViewInit(): void {    
     this.allMarkValue.email = localStorage.getItem('email') as string;
     this.gameService.getMarkGames(this.allMarkValue).subscribe(data=>{
-      
       this.games = data;
       this.loadTable();
 
+      const resultData : any = data
+      this.elementData = resultData
+      this.dataSource = new MatTableDataSource(this.elementData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-
   }
   
   get gameList(){

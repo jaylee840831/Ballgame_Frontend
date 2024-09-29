@@ -1,47 +1,143 @@
+<div class="contact-image div_distance">
+  <h3>儲存球局</h3>
+</div>
+
+<!-- <div class="row div_distance" style="width: 100%; overflow-x: auto;">
+		<table
+				id="game_table"
+				class="table table-bordered table-hover"
+				style="width:100%; min-width: 600px; border-collapse: collapse;"
+		>
+				<thead>
+						<tr>
+							<th style="display:none">id</th>
+							<th></th>
+							<th></th>
+							<th>發起人</th>
+							<th>球局</th>
+							<th>球場</th>
+							<th>開始時間</th>
+							<th>結束時間</th>
+							<th>備註</th>
+						</tr>
+				</thead>
+				<tbody>
+						<tr *ngFor="let item of gameList; let i=index">
+								<td style="display:none" ></td>
+								<td (click)="mark(item.id)" title="點我儲存球局" >
+										<svg id={{item.id}}
+										xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-star" viewBox="0 0 16 16">
+										<path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+										</svg>
+								</td>
+								<td ><button class="btn btn-secondary" [routerLink]="['/manage/chat',item.id]">聊天室</button></td>
+								<td >{{item.sponsor}}</td>
+								<td >{{item.gameName}}</td>
+								<td >{{item.courtName}}</td>
+								<td >{{ item.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}</td>
+								<td >{{item.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}</td>
+								<td  data-bs-toggle="tooltip" data-bs-placement="top" title="點我看更多" (click)="note(item.note)">
+										{{item.note}}
+								</td>
+						</tr>
+				</tbody>
+		</table>
+</div> -->
+
 <div class="container div_distance">
-    <div class="contact-image">
-        <h3>儲存球局</h3>
-    </div>
-    <div class="row div_distance" style="width: 100%; overflow-x: auto;">
-        <table
-            id="game_table"
-            class="table table-bordered table-hover"
-            style="width:100%; min-width: 600px; border-collapse: collapse;"
-        >
-            <thead>
-                <tr>
-                  <th style="display:none">id</th>
-                  <th></th>
-                  <th></th>
-                  <th>發起人</th>
-                  <th>球局</th>
-                  <th>球場</th>
-                  <th>開始時間</th>
-                  <th>結束時間</th>
-                  <th>備註</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of gameList; let i=index">
-                    <td style="display:none" ></td>
-                    <td (click)="mark(item.id)" title="點我儲存球局" >
-                        <svg id={{item.id}}
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-star" viewBox="0 0 16 16">
-                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-                        </svg>
-                    </td>
-                    <td ><button class="btn btn-secondary" [routerLink]="['/manage/chat',item.id]">聊天室</button></td>
-                    <td >{{item.sponsor}}</td>
-                    <td >{{item.gameName}}</td>
-                    <td >{{item.courtName}}</td>
-                    <td >{{ item.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}</td>
-                    <td >{{item.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}</td>
-                    <td  data-bs-toggle="tooltip" data-bs-placement="top" title="點我看更多" (click)="note(item.note)">
-                        {{item.note}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+	<div class="row" style="width: 100%; overflow: auto;">
+		<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+			<!-- store game -->
+			<ng-container matColumnDef="id">
+				<th mat-header-cell *matHeaderCellDef>
+				</th>
+				<td mat-cell *matCellDef="let element" (click)="mark(element.id)" title="點我儲存球局">
+					<svg id={{element.id}} *ngIf = "element.mark"
+					xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-star" viewBox="0 0 16 16">
+					<path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+					</svg>
+					<svg id={{element.id}} *ngIf = "!element.mark"
+					xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+					<path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+					</svg>
+				</td>
+			</ng-container>
+
+			<!-- chat -->
+			<ng-container matColumnDef="chat">
+				<th mat-header-cell *matHeaderCellDef>
+				</th>
+				<td mat-cell *matCellDef="let element">
+					<button class="btn btn-secondary" [routerLink]="['/manage/chat',element.id]">
+						聊天室
+					</button>
+				</td>
+			</ng-container>
+
+			<!-- sponsor -->
+			<ng-container matColumnDef="sponsor">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					發起人
+				</th>
+				<td mat-cell *matCellDef="let element">
+					{{element.sponsor}}
+				</td>
+			</ng-container>
+
+			<!-- game -->
+			<ng-container matColumnDef="gameName">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					球局
+				</th>
+				<td mat-cell *matCellDef="let element">
+					{{element.gameName}}
+				</td>
+			</ng-container>
+
+			<!-- court -->
+			<ng-container matColumnDef="courtName">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					球場
+				</th>
+				<td mat-cell *matCellDef="let element">
+					{{element.courtName}}
+				</td>
+			</ng-container>
+
+			<!-- start date -->
+			<ng-container matColumnDef="startDate">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					開始時間
+				</th>
+				<td mat-cell *matCellDef="let element">
+					{{ element.startDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}
+				</td>
+			</ng-container>
+
+			<!-- end date -->
+			<ng-container matColumnDef="endDate">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					結束時間
+				</th>
+				<td mat-cell *matCellDef="let element">
+					{{element.endDate | date: 'yyyy/MM/dd HH:mm EE':'+0800' }}
+				</td>
+			</ng-container>
+
+			<!-- note -->
+			<ng-container matColumnDef="note">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					備註
+				</th>
+				<td mat-cell *matCellDef="let element" data-bs-toggle="tooltip" data-bs-placement="top" title="點我看更多" (click)="note(element.note)">
+					{{element.note}}
+				</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+	</div>
+	<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>
 

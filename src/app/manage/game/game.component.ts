@@ -1,9 +1,13 @@
 import { MarkPost, AllMarkPost } from './../../@modules/games/games.module';
 import { ProfileService } from './../../@services/profile.service';
 import { ModalService } from './../../@services/modal.service';
-import { AfterViewInit, Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { GameService } from 'src/app/@services/game.service';
 import { Game, Games } from 'src/app/@modules/games/games.module';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-game',
@@ -11,10 +15,13 @@ import { Game, Games } from 'src/app/@modules/games/games.module';
   styleUrls: ['./game.component.css']
 })
 
-export class GameComponent implements OnInit{
+export class GameComponent implements OnInit, AfterViewInit{
 
   marks : any;
   games : any;
+  dataSource : any;
+
+  elementData : Games[] = [];
 
   markValue : MarkPost = {
     email:'',
@@ -25,18 +32,36 @@ export class GameComponent implements OnInit{
     email:''
   }
 
+  displayedColumns: string[] = [
+    'id',
+    'chat',
+    'sponsor',
+    'gameName',
+    'courtName',
+    'startDate',
+    'endDate',
+    'note'
+  ];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(private gameService : GameService, private profileService : ProfileService, private modalService : ModalService){};
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
+  ngAfterViewInit(): void {    
     this.allMarkValue.email = localStorage.getItem('email') as string;
     this.gameService.getGames(this.allMarkValue).subscribe(data=>{
-      
       this.games = data;
       this.loadTable();
 
+      const resultData : any = data
+      this.elementData = resultData
+      this.dataSource = new MatTableDataSource(this.elementData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-
   }
   
   get gameList(){
@@ -44,36 +69,33 @@ export class GameComponent implements OnInit{
   }
 
   loadTable(){
-    
-    window.setTimeout(( () => 
-    {
+    setTimeout(() => {
       (<any>$('#game_table')).DataTable(
-          {
-            "language": {
-                "processing": "處理中...",
-                "loadingRecords": "載入中...",
-                "lengthMenu": "顯示 _MENU_ 項結果",
-                "zeroRecords": "沒有符合的結果",
-                "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-                "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-                "infoFiltered": "(從 _MAX_ 項結果中過濾)",
-                "infoPostFix": "",
-                "search": "搜尋:",
-                "paginate": {
-                    "first": "第一頁",
-                    "previous": "上一頁",
-                    "next": "下一頁",
-                    "last": "最後一頁"
-                },
-                "aria": {
-                    "sortAscending": ": 升冪排列",
-                    "sortDescending": ": 降冪排列"
-                }
+        {
+        "language": {
+            "processing": "處理中...",
+            "loadingRecords": "載入中...",
+            "lengthMenu": "顯示 _MENU_ 項結果",
+            "zeroRecords": "沒有符合的結果",
+            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+            "infoPostFix": "",
+            "search": "搜尋:",
+            "paginate": {
+                "first": "第一頁",
+                "previous": "上一頁",
+                "next": "下一頁",
+                "last": "最後一頁"
+            },
+            "aria": {
+                "sortAscending": ": 升冪排列",
+                "sortDescending": ": 降冪排列"
             }
         }
+      }
       )
-    }), 1000);//延遲一秒後顯示datatable
-
+    }, 1000)
   }
 
   note(note : string){

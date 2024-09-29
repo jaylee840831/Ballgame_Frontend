@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProcessBarModule } from './@shared/process-bar/process-bar.module';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,6 +20,7 @@ import { BasicAuthHtppInterceptorService } from './@services/basic-auth-htpp-int
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
