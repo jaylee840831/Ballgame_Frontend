@@ -51,6 +51,10 @@
 </div> -->
 
 <div class="container div_distance">
+	<div *ngIf="isLoading" class="loading-overlay">
+		<div class="spinner"></div>
+		<p>Loading...</p>
+	</div>
 	<div class="row" style="width: 100%; overflow: auto;">
 		<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 			<!-- store game -->

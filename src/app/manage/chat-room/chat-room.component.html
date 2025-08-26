@@ -1,5 +1,8 @@
 <div class="container div_distance">
-
+    <div *ngIf="isLoading" class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
     <div class="row">
         <table id="game_table" class="table table-bordered" style="width:100%">
 

@@ -15,7 +15,7 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./game-history.component.css']
 })
 export class GameHistoryComponent implements OnInit, AfterViewInit{
-
+  isLoading: boolean = false;
   marks : any;
   games : any;
   dataSource : any;
@@ -47,7 +47,9 @@ export class GameHistoryComponent implements OnInit, AfterViewInit{
 
   constructor(private gameService : GameService, private profileService : ProfileService, private modalService : ModalService){};
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoading = true;
+  }
 
   ngAfterViewInit(): void {    
     this.allMarkValue.email = localStorage.getItem('email') as string;
@@ -68,9 +70,9 @@ export class GameHistoryComponent implements OnInit, AfterViewInit{
   }
 
   loadTable(){
-
-    window.setTimeout(( () => (<any>$('#game_table')).DataTable(
-      {
+    setTimeout(() => {
+      (<any>$('#game_table')).DataTable(
+        {
         "language": {
             "processing": "處理中...",
             "loadingRecords": "載入中...",
@@ -92,9 +94,10 @@ export class GameHistoryComponent implements OnInit, AfterViewInit{
                 "sortDescending": ": 降冪排列"
             }
         }
-    }
-    ) ), 1000);//延遲一秒後顯示datatable
-
+      }
+      )
+      this.isLoading = false;
+    }, 1000)
   }
 
   note(note : string){

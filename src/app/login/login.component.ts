@@ -13,8 +13,8 @@ import { LoginService } from '../@services/login.service';
 export class LoginComponent implements OnInit{
 
   loginValue: LoginPost = {
-    email: '',
-    password: ''
+    email: 'test@gmail.com',
+    password: '12345678'
   }
 
   // loginResponse: LoginResponse = {

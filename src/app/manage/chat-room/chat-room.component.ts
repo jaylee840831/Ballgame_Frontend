@@ -12,16 +12,17 @@ import { Game} from 'src/app/@modules/games/games.module';
   styleUrls: ['./chat-room.component.css']
 })
 export class ChatRoomComponent implements OnInit, OnDestroy{
-
+  isLoading: boolean = false;
   uid!:number;
   game : Game = new Game();
   stompClient:any;
-  url = this.commonService.getBackendUrl()+'/server1';
+  url = this.commonService.getBackendUrl()+'/ws';
   subscribeUrl = '/topic/return-to';
 
   constructor(private commonService : CommonService, private websocketService : WebsocketService, private gameService : GameService,private modalService : ModalService ,private route : ActivatedRoute){}
 
   ngOnInit(): void {
+    this.isLoading = true;
 
     this.route.paramMap.subscribe(data=>{
       this.uid = data.get('id') as unknown as number;
@@ -40,17 +41,26 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
     });
 
     //stomp client connect
-    this.stompClient = this.websocketService.connect(this.stompClient, this.url);
+    this.stompClient = this.websocketService.connect(this.url);
 
 
-    //stomp client subscribe
-    window.setTimeout(( () => { 
-      this.stompClient.subscribe(this.subscribeUrl,(response:any) => {
+    //stomp client activate
+    window.setTimeout(( () => {
+      this.stompClient.onConnect = (frame: any) => {
+        // console.log('Connected: ', frame);
+        this.stompClient.subscribe(this.subscribeUrl, (message: { body: any; }) => {
+          // console.log('Received:', message.body);
+          this.loadMessage(JSON.parse(message.body));
+        });
+      };
 
-        let message = JSON.parse(response.body);
-        this.loadMessage(message);
+      this.stompClient.onStompError = (frame:any) => {
+        console.error('Broker reported error: ' + frame.headers['message']);
+      };
+      
+      this.stompClient.activate();
 
-      })
+      this.isLoading = false;
     }), 4000);
 
   }
@@ -67,11 +77,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
   }
 
   loadMessage(message:any){
-
     if(message.groupUid == this.uid){
-
       if(localStorage.getItem('account') != message.name){
-
         $('.chat-log').append(
           '<div style="	background: #fafafa;padding: 10px;margin: 0 auto 20px;max-width: 80%;float: left;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,.1);clear: both;">'
           +'<img src="assets/basketball.png" style="width:100px;height:100px">'
@@ -85,10 +92,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
           +'</div>'
           +'</div>'
         );
-  
       }
       else{
-  
         $('.chat-log').append(
           '<div style="	background: #fafafa;padding: 10px;margin: 0 auto 20px;max-width: 80%;float: left;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,.1);clear: both;	float: right;background: #DCF8C6;text-align: right;">'
           +'<img src="assets/basketballplayer.png" style="width:100px;height:100px">'
@@ -102,15 +107,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
           +'</div>'
           +'</div>'
         );
-  
       }
-
     }
-
   }
 
   send(){
-
     let jsonObj={
       groupUid : this.uid,
       name : localStorage.getItem('account'),
@@ -118,11 +119,15 @@ export class ChatRoomComponent implements OnInit, OnDestroy{
       date : new Date()
     }
 
-    this.stompClient.send('/app/message', {}, JSON.stringify(jsonObj));
+    if (this.stompClient && this.stompClient.connected) {
+      this.stompClient.publish({
+        destination: '/app/message',
+        body: JSON.stringify(jsonObj)
+      });
+    } else {
+      console.log('STOMP client is not connected yet.');
+    }
+
     $('#messageInfo').val('')
   }
-
-  // reloadPage(){
-  //   this.ngOnInit();
-  // }
 }

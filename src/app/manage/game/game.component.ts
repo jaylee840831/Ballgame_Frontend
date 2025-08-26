@@ -16,7 +16,7 @@ import { MatSort } from '@angular/material/sort';
 })
 
 export class GameComponent implements OnInit, AfterViewInit{
-
+  isLoading: boolean = false;
   marks : any;
   games : any;
   dataSource : any;
@@ -48,7 +48,9 @@ export class GameComponent implements OnInit, AfterViewInit{
 
   constructor(private gameService : GameService, private profileService : ProfileService, private modalService : ModalService){};
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoading = true;
+  }
 
   ngAfterViewInit(): void {    
     this.allMarkValue.email = localStorage.getItem('email') as string;
@@ -95,6 +97,7 @@ export class GameComponent implements OnInit, AfterViewInit{
         }
       }
       )
+      this.isLoading = false;
     }, 1000)
   }
 
