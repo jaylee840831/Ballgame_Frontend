@@ -1,12 +1,27 @@
-FROM node:alpine AS build
+# ===========================
+# Build Angular
+# ===========================
+FROM node:20-alpine AS build
+
 WORKDIR /app
-RUN npm cache clean --force
-# Copy files from local machine to virtual directory in docker image
-COPY . .
+
+COPY package*.json ./
+
 RUN npm install
+
+COPY . .
+
 RUN npm run build
 
-FROM nginx:1.15.2-alpine AS ngi
-COPY --from=build /app/dist/ballgame_frontend /user/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/
-# CMD envsubst '${BACKEND_URI}' < /etc/nginx/conf.d/nginx.conf > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'
+# ===========================
+# Nginx
+# ===========================
+FROM nginx:1.27-alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build /app/dist/ballgame_frontend /usr/share/nginx/html/
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

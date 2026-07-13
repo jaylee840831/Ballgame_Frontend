@@ -10,43 +10,51 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.2.6",
-    "@angular/cdk": "^18.2.6",
-    "@angular/common": "^18.2.6",
-    "@angular/compiler": "^18.2.6",
-    "@angular/core": "^18.2.6",
-    "@angular/forms": "^18.2.6",
-    "@angular/material": "^18.2.6",
-    "@angular/platform-browser": "^18.2.6",
-    "@angular/platform-browser-dynamic": "^18.2.6",
-    "@angular/router": "^18.2.6",
-    "@ng-bootstrap/ng-bootstrap": "^14.0.1",
-    "@popperjs/core": "^2.11.6",
-    "@stomp/stompjs": "^7.0.0",
-    "@types/popper.js": "^1.11.0",
-    "@types/sockjs-client": "^1.5.1",
-    "ballgame-frontend": "file:",
-    "bootstrap": "^5.2.3",
-    "jquery": "^3.6.3",
-    "popper.js": "^1.16.1",
-    "rxjs": "~7.8.0",
-    "sockjs-client": "^1.6.1",
-    "stomp-websocket": "^2.3.4-next",
-    "tslib": "^2.3.0",
-    "typescript": "^5.5.4",
-    "zone.js": "~0.12.0"
+    "@angular/animations": "18.2.14",
+    "@angular/cdk": "18.2.14",
+    "@angular/common": "18.2.14",
+    "@angular/compiler": "18.2.14",
+    "@angular/core": "18.2.14",
+    "@angular/forms": "18.2.14",
+    "@angular/material": "18.2.14",
+    "@angular/platform-browser": "18.2.14",
+    "@angular/platform-browser-dynamic": "18.2.14",
+    "@angular/router": "18.2.14",
+
+    "@ng-bootstrap/ng-bootstrap": "17.0.1",
+
+    "@popperjs/core": "2.11.8",
+    "@stomp/stompjs": "7.0.0",
+
+    "@types/popper.js": "1.11.0",
+    "@types/sockjs-client": "1.5.4",
+
+    "bootstrap": "5.3.3",
+    "jquery": "3.7.1",
+
+    "rxjs": "7.8.1",
+    "sockjs-client": "1.6.1",
+    "stomp-websocket": "2.3.4-next",
+
+    "tslib": "2.8.1",
+
+    "zone.js": "0.14.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.6",
-    "@angular/cli": "^18.2.6",
-    "@angular/compiler-cli": "^18.2.6",
-    "@types/jasmine": "~4.3.0",
-    "@types/jquery": "^3.5.16",
-    "jasmine-core": "~4.5.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.0.0"
+    "@angular-devkit/build-angular": "18.2.14",
+    "@angular/cli": "18.2.14",
+    "@angular/compiler-cli": "18.2.14",
+
+    "@types/jasmine": "5.1.4",
+    "@types/jquery": "3.5.32",
+
+    "jasmine-core": "5.1.2",
+    "karma": "6.4.4",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-coverage": "2.2.1",
+    "karma-jasmine": "5.1.0",
+    "karma-jasmine-html-reporter": "2.1.0",
+
+    "typescript": "5.5.4"
   }
 }
