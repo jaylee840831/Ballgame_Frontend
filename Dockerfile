@@ -18,6 +18,9 @@ RUN npm run build
 # ===========================
 FROM nginx:1.27-alpine
 
+# 移除 nginx 預設 welcome page
+RUN rm -rf /usr/share/nginx/html/*
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/dist/ballgame_frontend /usr/share/nginx/html/
